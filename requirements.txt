@@ -1,0 +1,6 @@
+Flask~=3.0.3
+ollama
+textract
+sqlalchemy
+flask-sqlalchemy
+flask-wtf

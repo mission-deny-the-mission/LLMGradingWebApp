@@ -1,0 +1,21 @@
+{% from "__formhelpers.html" import render_field %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Upload work for grading</title>
+</head>
+<body>
+    <h1>Welcome to the LLM grader</h1>
+    <p>Please submit your work for grading</p>
+    <form action="/upload" method="post">
+        <dl>
+            {{ form.csrf_token }}
+            {{ render_field(form.author) }}
+            {{ render_field(form.title) }}
+            {{ render_field(form.document) }}
+        </dl>
+        <input type=submit value="Upload">
+    </form>
+</body>
+</html>
