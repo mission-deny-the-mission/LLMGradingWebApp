@@ -8,12 +8,12 @@
 <body>
     <h1>Welcome to the LLM grader</h1>
     <p>Please submit your work for grading</p>
-    <form action="/upload" method="post">
+    <form action="/upload" method="post" enctype="multipart/form-data">
         <dl>
             {{ form.csrf_token }}
             {{ render_field(form.author) }}
             {{ render_field(form.title) }}
-            {{ render_field(form.document) }}
+            {{ render_field(form.file) }}
         </dl>
         <input type=submit value="Upload">
     </form>
