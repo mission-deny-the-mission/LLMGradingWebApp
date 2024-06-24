@@ -4,3 +4,4 @@ textract
 sqlalchemy
 flask-sqlalchemy
 flask-wtf
+#celery

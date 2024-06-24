@@ -12,6 +12,5 @@ class Work(db.Model):
     filename: Mapped[str]
     title: Mapped[str]
     author: Mapped[str]
-    grade: Mapped[Optional[str]]
     status: Mapped[str]
     processed: Mapped[bool]

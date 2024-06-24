@@ -23,10 +23,6 @@
             <td>{{ work.author }}</td>
         </tr>
         <tr>
-            <th>Grade</th>
-            <td>{{ work.grade }}</td>
-        </tr>
-        <tr>
             <th>Status</th>
             <td>{{ work.status }}</td>
         </tr>
@@ -35,5 +31,11 @@
             <td>{{ work.processed }}</td>
         </tr>
     </table>
+    {% if work.processed %}
+        <h2>Results and Feedback:</h2>
+        <p>{{ result }}</p>
+    {% else %}
+        <h2>Results are not avaliable as the work is yet to be processed by the AI.</h2>
+    {% endif %}
 </body>
 </html>

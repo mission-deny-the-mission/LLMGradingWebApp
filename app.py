@@ -1,15 +1,27 @@
 from flask import Flask, flash, request, redirect, url_for, render_template
-from sqlalchemy import Insert
+#from celery import Celery
 from werkzeug.utils import secure_filename
 from common import extract_file_extension
 from forms import *
 from models import *
-from worker import Worker
+from time import sleep
+#from worker import Worker
 import os
+
+import ollama
+import textract
+import os
+import threading
+
+PROMPT = "Grade the following work from A to F giving feedback:\n"
+MODEL = "llama3"
 
 UPLOAD_FOLDER = "uploads"
 ALLOWED_EXTENSIONS = {'pdf', 'doc', 'docx'}
 SECRET_KEY = os.urandom(32)
+RESULTS_FOLDER = "results"
+
+
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = SECRET_KEY
@@ -17,6 +29,30 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///project.db"
 db.init_app(app)
 
+class Worker(threading.Thread):
+    upload_folder = ""
+    def __init__(self, upload_folder):
+        super(Worker, self).__init__()
+        self.upload_folder = upload_folder
+
+    def run(self):
+        with app.app_context():
+            while True:
+                to_grade = Work.query.filter_by(processed=False).all()
+                for result in to_grade:
+                    full_file_path = os.path.join(self.upload_folder, result.filename)
+                    if extract_file_extension(result.filename) == "txt":
+                        file = open(full_file_path, 'r')
+                        text = file.read(file)
+                    else:
+                        text = str(textract.process(full_file_path))
+                    response_text = ollama.generate(model=MODEL, prompt=(PROMPT + text))["response"]
+                    open(os.path.join(RESULTS_FOLDER, str(result.id) + ".txt"), "w").write(response_text)
+                    result.processed = True
+                    result.status = "Graded successfully"
+                db.session.commit()
+                if len(to_grade) == 0:
+                    sleep(1)
 
 def is_file_extension_allowed(filename):
     extension = extract_file_extension(filename)
@@ -33,16 +69,20 @@ def upload_work():  # put application's code here
     return render_template("upload_work.html", form=UploadForm())
 
 
-@app.route('/results_list')
-def results_list():
+@app.route('/work_list')
+def work_list():
     work = Work.query.all()
-    return render_template("results_list.html", results_list=work)
+    return render_template("work_list.html", results_list=work)
 
 
 @app.route('/result/<int:test_id>')
-def result(test_id):
+def results_page(test_id):
     work = Work.query.get(test_id)
-    return render_template('result.html', work=work)
+    if work.processed:
+        result = open(os.path.join(RESULTS_FOLDER, str(work.id) + ".txt")).read()
+    else:
+        result = None
+    return render_template('results_page.html', work=work, result=result)
 
 
 # @app.route('/upload', methods=['POST'])
@@ -80,7 +120,7 @@ def upload_file():
         work.processed = False
         db.session.add(work)
         db.session.commit()
-        return redirect(url_for('results_list'))
+        return redirect(url_for('work_list'))
     else:
         return open("static/upload_form_validation_error.html").read()
 
