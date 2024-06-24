@@ -5,9 +5,10 @@ from common import extract_file_extension
 from forms import *
 from models import *
 from time import sleep
+from flask_bootstrap import Bootstrap
+from nav import nav
 #from worker import Worker
 import os
-
 import ollama
 import textract
 import os
@@ -22,12 +23,13 @@ SECRET_KEY = os.urandom(32)
 RESULTS_FOLDER = "results"
 
 
-
 app = Flask(__name__)
+Bootstrap(app)
 app.config['SECRET_KEY'] = SECRET_KEY
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///project.db"
 db.init_app(app)
+nav.init_app(app)
 
 class Worker(threading.Thread):
     upload_folder = ""
@@ -61,7 +63,7 @@ def is_file_extension_allowed(filename):
 
 @app.route('/')
 def index():
-    return open('static/index.html').read()
+    return render_template("index.html")
 
 
 @app.route('/upload_work')
@@ -120,9 +122,10 @@ def upload_file():
         work.processed = False
         db.session.add(work)
         db.session.commit()
-        return redirect(url_for('work_list'))
+        db.session.refresh(work)
+        return render_template("successful_upload.html", id=work.id)
     else:
-        return open("static/upload_form_validation_error.html").read()
+        return render_template("upload_form_validation_error.html")
 
 @app.route('/successful_upload')
 def successful_upload():

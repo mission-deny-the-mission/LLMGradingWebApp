@@ -1,33 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Result {{ result_id }}</title>
-</head>
-<body>
-    <table>
+{%- extends "base.html" %}
+{% block title %}Result {{ result_id }}{% endblock %}
+{% block content %}
+    <h2>Details:</h2>
+    <table class="table">
         <tr>
-            <th>ID</th>
+            <th scope="row">ID</th>
             <td>{{ work.id }}</td>
         </tr>
         <tr>
-            <th>File name</th>
+            <th scope="row">File name</th>
             <td>{{ work.filename }}</td>
         </tr>
         <tr>
-            <th>Title</th>
+            <th scope="row">Title</th>
             <td>{{ work.title }}</td>
         </tr>
         <tr>
-            <th>Author</th>
+            <th scope="row">Author</th>
             <td>{{ work.author }}</td>
         </tr>
         <tr>
-            <th>Status</th>
+            <th scope="row">Status</th>
             <td>{{ work.status }}</td>
         </tr>
         <tr>
-            <th>Processed</th>
+            <th scope="row">Processed</th>
             <td>{{ work.processed }}</td>
         </tr>
     </table>
@@ -37,5 +34,5 @@
     {% else %}
         <h2>Results are not avaliable as the work is yet to be processed by the AI.</h2>
     {% endif %}
-</body>
-</html>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+{% endblock %}

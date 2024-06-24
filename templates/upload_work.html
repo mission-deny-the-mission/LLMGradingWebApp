@@ -1,11 +1,7 @@
+{%- extends "base.html" %}
 {% from "__formhelpers.html" import render_field %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Upload work for grading</title>
-</head>
-<body>
+{% block title %}Upload work for grading{% endblock %}
+{% block content %}
     <h1>Welcome to the LLM grader</h1>
     <p>Please submit your work for grading</p>
     <form action="/upload" method="post" enctype="multipart/form-data">
@@ -17,5 +13,4 @@
         </dl>
         <input type=submit value="Upload">
     </form>
-</body>
-</html>
+{% endblock %}
