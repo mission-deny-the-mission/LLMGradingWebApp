@@ -9,7 +9,7 @@ from flask_bootstrap import Bootstrap
 from nav import nav
 #from worker import Worker
 import os
-import ollama
+from ollama import Client
 import textract
 import os
 import threading
@@ -36,10 +36,12 @@ class Worker(threading.Thread):
     def __init__(self, upload_folder):
         super(Worker, self).__init__()
         self.upload_folder = upload_folder
+        self.client = Client(host="http://ollama:11343")
 
     def run(self):
         with app.app_context():
             while True:
+                print("checkpoint")
                 to_grade = Work.query.filter_by(processed=False).all()
                 for result in to_grade:
                     full_file_path = os.path.join(self.upload_folder, result.filename)
@@ -48,7 +50,7 @@ class Worker(threading.Thread):
                         text = file.read(file)
                     else:
                         text = str(textract.process(full_file_path))
-                    response_text = ollama.generate(model=MODEL, prompt=(PROMPT + text))["response"]
+                    response_text = self.client.generate(model=MODEL, prompt=(PROMPT + text))["response"]
                     open(os.path.join(RESULTS_FOLDER, str(result.id) + ".txt"), "w").write(response_text)
                     result.processed = True
                     result.status = "Graded successfully"

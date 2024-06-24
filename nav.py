@@ -1,5 +1,5 @@
-from flask_nav import Nav
-from flask_nav.elements import Navbar, View
+from flask_nav3 import Nav
+from flask_nav3.elements import Navbar, View
 
 nav = Nav()
 
