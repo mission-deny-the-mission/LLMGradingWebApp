@@ -29,5 +29,5 @@ jobs:
 
     - name: 'Build Inventory Image'
       run: |
-        docker build . --tag ghcr.io/<your-GitHub-username>/store:$(date +%s)
-        docker push ghcr.io/<your-GitHub-username>/store:latest
+        docker build . --tag ghcr.io/mission-deny-the-mission/store:$(date +%s)
+        docker push ghcr.io/mission-deny-the-mission/store:latest
