@@ -23,7 +23,7 @@ ALLOWED_EXTENSIONS = {'pdf', 'doc', 'docx'}
 SECRET_KEY = os.urandom(32)
 RESULTS_FOLDER = "results"
 
-def create_app():
+def create_app(run_worker = True):
     app = Flask(__name__)
     Bootstrap(app)
     app.config['SECRET_KEY'] = SECRET_KEY
@@ -32,6 +32,9 @@ def create_app():
     app.register_blueprint(frontend)
     db.init_app(app)
     nav.init_app(app)
+    if run_worker:
+        worker_instance = Worker(app)
+        worker_instance.start()
     return app
 
 class Worker(threading.Thread):
@@ -45,7 +48,7 @@ class Worker(threading.Thread):
     def run(self):
         with self.app.app_context():
             while True:
-                #print("checkpoint")
+                print("checkpoint")
                 to_grade = Work.query.filter_by(processed=False).all()
                 for result in to_grade:
                     full_file_path = os.path.join(self.upload_folder, result.filename)
@@ -61,10 +64,3 @@ class Worker(threading.Thread):
                 db.session.commit()
                 if len(to_grade) == 0:
                     sleep(1)
-
-
-if __name__ == '__main__':
-    app = create_app()
-    worker_instance = Worker(app)
-    worker_instance.start()
-    app.run()

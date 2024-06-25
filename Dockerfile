@@ -14,4 +14,4 @@ COPY . .
 
 RUN python3 create_database.py
 
-ENTRYPOINT ["gunicorn", "--bind=0.0.0.0", "app:app"]
+ENTRYPOINT ["gunicorn", "--bind=0.0.0.0", "wsgi:app"]
