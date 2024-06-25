@@ -23,25 +23,27 @@ ALLOWED_EXTENSIONS = {'pdf', 'doc', 'docx'}
 SECRET_KEY = os.urandom(32)
 RESULTS_FOLDER = "results"
 
-
-app = Flask(__name__)
-Bootstrap(app)
-app.config['SECRET_KEY'] = SECRET_KEY
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///project.db"
-app.register_blueprint(frontend)
-db.init_app(app)
-nav.init_app(app)
+def create_app():
+    app = Flask(__name__)
+    Bootstrap(app)
+    app.config['SECRET_KEY'] = SECRET_KEY
+    app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+    app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///project.db"
+    app.register_blueprint(frontend)
+    db.init_app(app)
+    nav.init_app(app)
+    return app
 
 class Worker(threading.Thread):
     upload_folder = ""
-    def __init__(self, upload_folder):
+    def __init__(self, app):
         super(Worker, self).__init__()
-        self.upload_folder = upload_folder
+        self.upload_folder = app.config['UPLOAD_FOLDER']
         self.client = Client(host="http://ollama:11343")
+        self.app = app
 
     def run(self):
-        with app.app_context():
+        with self.app.app_context():
             while True:
                 #print("checkpoint")
                 to_grade = Work.query.filter_by(processed=False).all()
@@ -62,6 +64,7 @@ class Worker(threading.Thread):
 
 
 if __name__ == '__main__':
-    worker_instance = Worker(app.config['UPLOAD_FOLDER'])
+    app = create_app()
+    worker_instance = Worker(app)
     worker_instance.start()
     app.run()
