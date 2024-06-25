@@ -6,4 +6,5 @@ flask-sqlalchemy
 flask-wtf
 flask-bootstrap
 flask-nav3
-celery
+django-six
+celery==5.4.0

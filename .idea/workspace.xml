@@ -4,12 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="317c7a69-e4b5-473e-a845-c3fca95df461" name="Changes" comment="Fix the database creation script borken by the last commit">
-      <change afterPath="$PROJECT_DIR$/wsgi.py" afterDir="false" />
+    <list default="true" id="317c7a69-e4b5-473e-a845-c3fca95df461" name="Changes" comment="Make app work in gunicorn again">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/create_app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/create_database.py" beforeDir="false" afterPath="$PROJECT_DIR$/create_database.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/create_app.py" beforeDir="false" afterPath="$PROJECT_DIR$/create_app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tasks.py" beforeDir="false" afterPath="$PROJECT_DIR$/tasks.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wsgi.py" beforeDir="false" afterPath="$PROJECT_DIR$/wsgi.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -208,7 +210,7 @@
       <workItem from="1719064083888" duration="60374000" />
       <workItem from="1719256683274" duration="413000" />
       <workItem from="1719257105622" duration="2844000" />
-      <workItem from="1719326609093" duration="6205000" />
+      <workItem from="1719326609093" duration="9552000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <option name="closed" value="true" />
@@ -274,7 +276,15 @@
       <option name="project" value="LOCAL" />
       <updated>1719331237160</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Make app work in gunicorn again">
+      <option name="closed" value="true" />
+      <created>1719335669235</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1719335669235</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -300,7 +310,8 @@
     <MESSAGE value="Refactor using Flask blueprints to move routes routes into seperate file" />
     <MESSAGE value="Implement app factory" />
     <MESSAGE value="Fix the database creation script borken by the last commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix the database creation script borken by the last commit" />
+    <MESSAGE value="Make app work in gunicorn again" />
+    <option name="LAST_COMMIT_MESSAGE" value="Make app work in gunicorn again" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

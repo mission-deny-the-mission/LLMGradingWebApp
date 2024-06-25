@@ -12,6 +12,6 @@ RUN pip install gunicorn
 
 COPY . .
 
-RUN python3 create_database.py
+#RUN python3 create_database.py
 
 ENTRYPOINT ["gunicorn", "--bind=0.0.0.0", "wsgi:app"]

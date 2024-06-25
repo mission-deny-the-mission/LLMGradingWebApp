@@ -3,9 +3,21 @@ services:
   llmgradingwebapp:
     build: .
     container_name: llmgradingwebapp
-    image: llmgradingwebapp:latest
+    volumes:
+      - ./instance:/usr/src/app/instance
+      - ./uploads:/usr/src/app/uploads
+      - ./results:/usr/src/app/results
     ports:
       - 8000:8000
+
+  celery:
+    build: .
+    container_name: celery
+    command: celery -A run.celery worker --loglevel=info
+    volumes:
+      - ./instance:/usr/src/app/instance
+      - ./uploads:/usr/src/app/uploads
+      - ./results:/usr/src/app/results
 
   ollama:
     image: ollama/ollama
@@ -19,6 +31,9 @@ services:
     container_name: ollama
     volumes:
       - /var/home/harry/.ollama:/root/.ollama
+
+  redis:
+    image: redis
 
 #volumes:
 #  ollama: {}
