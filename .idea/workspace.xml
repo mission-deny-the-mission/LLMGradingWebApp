@@ -4,10 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="317c7a69-e4b5-473e-a845-c3fca95df461" name="Changes" comment="Refactor using Flask blueprints to move routes routes into seperate file">
-      <change afterPath="$PROJECT_DIR$/tasks.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
+    <list default="true" id="317c7a69-e4b5-473e-a845-c3fca95df461" name="Changes" comment="Implement app factory">
+      <change beforePath="$PROJECT_DIR$/create_database.py" beforeDir="false" afterPath="$PROJECT_DIR$/create_database.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -84,7 +82,7 @@
       <recent name="$PROJECT_DIR$/templates" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.app">
+  <component name="RunManager" selected="Docker.docker-compose.yml: Compose Deployment">
     <configuration name="app" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="gradingWebApp" />
       <option name="ENV_FILES" value="" />
@@ -204,7 +202,7 @@
       <workItem from="1719064083888" duration="60374000" />
       <workItem from="1719256683274" duration="413000" />
       <workItem from="1719257105622" duration="2844000" />
-      <workItem from="1719326609093" duration="4157000" />
+      <workItem from="1719326609093" duration="4526000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <option name="closed" value="true" />
@@ -254,7 +252,15 @@
       <option name="project" value="LOCAL" />
       <updated>1719330619210</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Implement app factory">
+      <option name="closed" value="true" />
+      <created>1719330821146</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1719330821146</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -278,7 +284,8 @@
     <MESSAGE value="Improve user interface" />
     <MESSAGE value="Replace unmaintained library and containerize with docker" />
     <MESSAGE value="Refactor using Flask blueprints to move routes routes into seperate file" />
-    <option name="LAST_COMMIT_MESSAGE" value="Refactor using Flask blueprints to move routes routes into seperate file" />
+    <MESSAGE value="Implement app factory" />
+    <option name="LAST_COMMIT_MESSAGE" value="Implement app factory" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
@@ -295,7 +302,7 @@
     <SUITE FILE_PATH="coverage/LLMGradingWebApp$gradingWebApp.coverage" NAME="gradingWebApp Coverage Results" MODIFIED="1719327835704" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/gradingWebApp$gradingWebApp.coverage" NAME="gradingWebApp Coverage Results" MODIFIED="1719185724915" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/gradingWebApp$app.coverage" NAME="app Coverage Results" MODIFIED="1719240079708" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
-    <SUITE FILE_PATH="coverage/LLMGradingWebApp$app.coverage" NAME="app Coverage Results" MODIFIED="1719330727535" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/LLMGradingWebApp$app.coverage" NAME="app Coverage Results" MODIFIED="1719330776460" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/LLMGradingWebApp$Flask__app_py_.coverage" NAME="Flask (app.py) Coverage Results" MODIFIED="1719257284639" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
