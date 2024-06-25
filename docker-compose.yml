@@ -3,11 +3,7 @@ services:
   llmgradingwebapp:
     build: .
     container_name: llmgradingwebapp
-    user: "1000"
-    volumes:
-      - ./uploads:/usr/src/app/uploads
-      - ./results:/usr/src/app/results
-      - ./instance:/usr/src/app/instance
+    image: llmgradingwebapp:latest
     ports:
       - 8000:8000
 

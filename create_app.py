@@ -29,9 +29,6 @@ def create_app(run_worker = True):
     app.config['SECRET_KEY'] = SECRET_KEY
     app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
     app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///project.db"
-    app.config["RESULTS_FOLDER"] = RESULTS_FOLDER
-    app.config["PROMPT"] = PROMPT
-    app.config["MODEL"] = MODEL
     app.register_blueprint(frontend)
     db.init_app(app)
     nav.init_app(app)
@@ -45,15 +42,13 @@ class Worker(threading.Thread):
     def __init__(self, app):
         super(Worker, self).__init__()
         self.upload_folder = app.config['UPLOAD_FOLDER']
-        self.result_folder = app.config['RESULTS_FOLDER']
-        self.prompt = app.config['PROMPT']
-        self.model = app.config['MODEL']
-        self.client = Client(host="http://ollama:11434")
+        self.client = Client(host="http://ollama:11343")
         self.app = app
 
     def run(self):
         with self.app.app_context():
             while True:
+                print("checkpoint")
                 to_grade = Work.query.filter_by(processed=False).all()
                 for result in to_grade:
                     full_file_path = os.path.join(self.upload_folder, result.filename)
@@ -62,9 +57,10 @@ class Worker(threading.Thread):
                         text = file.read(file)
                     else:
                         text = str(textract.process(full_file_path))
-                    response_text = self.client.generate(model=self.model, prompt=(self.prompt + text))["response"]
-                    open(os.path.join(self.result_folder, str(result.id) + ".txt"), "w").write(response_text)
+                    response_text = self.client.generate(model=MODEL, prompt=(PROMPT + text))["response"]
+                    open(os.path.join(RESULTS_FOLDER, str(result.id) + ".txt"), "w").write(response_text)
                     result.processed = True
                     result.status = "Graded successfully"
                 db.session.commit()
-                sleep(1)
+                if len(to_grade) == 0:
+                    sleep(1)
