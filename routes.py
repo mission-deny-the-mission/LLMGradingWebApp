@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, abort, redirect, url_for, request
+from flask import Blueprint, current_app, render_template, abort, redirect, url_for, request
 from werkzeug.utils import secure_filename
 from models import *
 from forms import *
@@ -29,20 +29,22 @@ def work_list():
 
 @frontend.route('/result/<int:test_id>')
 def results_page(test_id):
+    results_folder = current_app.config['RESULTS_FOLDER']
     work = Work.query.get(test_id)
     if work.processed:
-        result = open(os.path.join(RESULTS_FOLDER, str(work.id) + ".txt")).read()
+        result = open(os.path.join(results_folder, str(work.id) + ".txt")).read()
     else:
         result = None
     return render_template('results_page.html', work=work, result=result)
 
 @frontend.route('/upload', methods=['POST'])
 def upload_file():
+    upload_folder = current_app.config['UPLOAD_FOLDER']
     form = UploadForm(request.form)
     #   file = request.files['document']
     if len(request.files) == 1:
         filename = secure_filename(request.files['file'].filename)
-        request.files['file'].save(os.path.join('uploads', filename))
+        request.files['file'].save(os.path.join(upload_folder, filename))
         work = Work()
         work.filename = filename
         work.title = form.title.data
