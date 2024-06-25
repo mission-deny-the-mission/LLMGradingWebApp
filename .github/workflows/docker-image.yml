@@ -13,21 +13,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-
-    - name: Lowercase Registry
-      id: registry_case
-      uses: ASzc/change-string-case-action@v6
-      with:
-        string: ${{ env.IMAGE_REGISTRY }}
-
     - name: Login to GitHub Container Registry
       uses: docker/login-action@v3
       with:
         registry: ghcr.io
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
-
-    - name: 'Build Inventory Image'
-      run: |
-        docker build . --file Dockerfile --tag llmgradingwebapp:$(date +%s)
-        docker push ghcr.io/mission-deny-the-mission/store:latest
+    - uses: actions/checkout@v4
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag llmgradingwebapp:$(date +%s) \
+           docker push ghcr.io/<your-GitHub-username>/store:latest
+      
