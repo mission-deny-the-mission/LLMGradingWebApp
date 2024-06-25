@@ -4,9 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="317c7a69-e4b5-473e-a845-c3fca95df461" name="Changes" comment="Fix the database creation script borken by the last commit">
-      <change afterPath="$PROJECT_DIR$/.github/workflows/publish-ghcr.yaml" afterDir="false" />
+    <list default="true" id="317c7a69-e4b5-473e-a845-c3fca95df461" name="Changes" comment="Remove old build pipeline">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/create_app.py" beforeDir="false" afterPath="$PROJECT_DIR$/create_app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/routes.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tasks.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -211,7 +213,7 @@
       <workItem from="1719256683274" duration="413000" />
       <workItem from="1719257105622" duration="2844000" />
       <workItem from="1719326609093" duration="6205000" />
-      <workItem from="1719350061330" duration="818000" />
+      <workItem from="1719350061330" duration="2746000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <option name="closed" value="true" />
@@ -277,7 +279,23 @@
       <option name="project" value="LOCAL" />
       <updated>1719331237160</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Add new build and push pipeline">
+      <option name="closed" value="true" />
+      <created>1719351005428</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1719351005429</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Remove old build pipeline">
+      <option name="closed" value="true" />
+      <created>1719351086344</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1719351086344</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -303,7 +321,9 @@
     <MESSAGE value="Refactor using Flask blueprints to move routes routes into seperate file" />
     <MESSAGE value="Implement app factory" />
     <MESSAGE value="Fix the database creation script borken by the last commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix the database creation script borken by the last commit" />
+    <MESSAGE value="Add new build and push pipeline" />
+    <MESSAGE value="Remove old build pipeline" />
+    <option name="LAST_COMMIT_MESSAGE" value="Remove old build pipeline" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

@@ -44,7 +44,6 @@ def upload_file():
     #   file = request.files['document']
     if len(request.files) == 1:
         filename = secure_filename(request.files['file'].filename)
-        request.files['file'].save(os.path.join(upload_folder, filename))
         work = Work()
         work.filename = filename
         work.title = form.title.data
@@ -54,6 +53,7 @@ def upload_file():
         db.session.add(work)
         db.session.commit()
         db.session.refresh(work)
+        request.files['file'].save(os.path.join(upload_folder, str(work.id) + "_" + filename))
         return render_template("successful_upload.html", id=work.id)
     else:
         return render_template("upload_form_validation_error.html")

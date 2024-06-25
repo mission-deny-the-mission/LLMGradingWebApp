@@ -54,17 +54,17 @@ class Worker(threading.Thread):
     def run(self):
         with self.app.app_context():
             while True:
-                to_grade = Work.query.filter_by(processed=False).all()
-                for result in to_grade:
-                    full_file_path = os.path.join(self.upload_folder, result.filename)
-                    if extract_file_extension(result.filename) == "txt":
+                work_to_grade = Work.query.filter_by(processed=False).all()
+                for work in work_to_grade:
+                    full_file_path = os.path.join(self.upload_folder, str(work.id) + "_" + work.filename)
+                    if extract_file_extension(work.filename) == "txt":
                         file = open(full_file_path, 'r')
-                        text = file.read(file)
+                        text = file.read()
                     else:
                         text = str(textract.process(full_file_path))
                     response_text = self.client.generate(model=self.model, prompt=(self.prompt + text))["response"]
-                    open(os.path.join(self.result_folder, str(result.id) + ".txt"), "w").write(response_text)
-                    result.processed = True
-                    result.status = "Graded successfully"
+                    open(os.path.join(self.result_folder, str(work.id) + ".txt"), "w").write(response_text)
+                    work.processed = True
+                    work.status = "Graded successfully"
                 db.session.commit()
                 sleep(1)
