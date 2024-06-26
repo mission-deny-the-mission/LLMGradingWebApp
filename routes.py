@@ -1,4 +1,4 @@
-# This file contains all of the routes and the code to process and render the associated web pages and post requests
+# This file contains all the routes and the code to process and render the associated web pages and post requests
 from flask import Blueprint, current_app, render_template, abort, redirect, url_for, request
 from werkzeug.utils import secure_filename
 from models import *
@@ -9,26 +9,31 @@ import os
 frontend = Blueprint('frontend', __name__,
                      template_folder='templates')
 
+
 # helper to determine if the file extension uploaded is usable
 def is_file_extension_allowed(filename):
     extension = extract_file_extension(filename)
     return extension in current_app.config["ALLOWED_EXTENSIONS"]
+
 
 # front page
 @frontend.route('/')
 def index():
     return render_template("index.html")
 
+
 # form for uploading work. Rendered using WTForms
 @frontend.route('/upload_work')
 def upload_work():  # put application's code here
     return render_template("upload_work.html", form=UploadForm())
+
 
 # list of work uploaded
 @frontend.route('/work_list')
 def work_list():
     work = Work.query.all()
     return render_template("work_list.html", work_list=work)
+
 
 # results page, this is where the grade and feedback will be displayed
 @frontend.route('/result/<int:test_id>')
@@ -46,6 +51,7 @@ def results_page(test_id):
     else:
         result = None
     return render_template('results_page.html', work=work, result=result)
+
 
 # this handles uploading files to be marked
 # Normally WTForms would be used for validation here, but unfortunately this wouldn't work right for some reason.

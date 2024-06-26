@@ -19,7 +19,8 @@ class Worker(threading.Thread):
         self.result_folder = app.config['RESULTS_FOLDER']
         self.prompt = app.config['PROMPT']
         self.model = app.config['MODEL']
-        self.client = Client(host="http://ollama:11434")
+        self.client = Client(app.config['OLLAMA_URL'])
+        print("using url: ", app.config['OLLAMA_URL'])
         self.app = app
 
     def run(self):
@@ -48,6 +49,7 @@ class Worker(threading.Thread):
                         # save the response to a file
                         open(os.path.join(self.result_folder, str(work.id) + ".txt"), "w").write(response_text)
                     except Exception as e:
+                        print(e)
                         # if an error occurred note this in the status field of the database
                         work.processed = True
                         work.status = "Error encountered while processing submission: "

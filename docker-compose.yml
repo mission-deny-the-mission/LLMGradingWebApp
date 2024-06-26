@@ -4,6 +4,8 @@ services:
     build: .
     container_name: llmgradingwebapp
     user: "1000"
+    environment:
+      - OLLAMA_URL=http://ollama:11434
     volumes:
       - ./uploads:/usr/src/app/uploads
       - ./results:/usr/src/app/results
@@ -22,7 +24,7 @@ services:
               capabilities: [gpu]
     container_name: ollama
     volumes:
-      - /var/home/harry/.ollama:/root/.ollama
+      - ~/.ollama:/root/.ollama
 
 #volumes:
 #  ollama: {}
