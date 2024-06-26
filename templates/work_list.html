@@ -12,14 +12,14 @@
         <th scope="col">Status</th>
         </thead>
         <tbody>
-        {% for result in results_list %}
+        {% for work in work_list %}
             <tr scope="row">
-                <td><a href="/result/{{ result.id }}">{{ result.id }}</a></td>
-                <td>{{ result.title }}</td>
-                <td>{{ result.author }}</td>
-                <td>{{ result.filename }}</td>
-                <td>{{ result.processed }}</td>
-                <td>{{ result.status }}</td>
+                <td><a href="/result/{{ work.id }}">{{ work.id }}</a></td>
+                <td>{{ work.title }}</td>
+                <td>{{ work.author }}</td>
+                <td>{{ work.filename }}</td>
+                <td>{{ work.processed }}</td>
+                <td>{{ work.status }}</td>
             </tr>
         {% endfor %}
         </tbody>
