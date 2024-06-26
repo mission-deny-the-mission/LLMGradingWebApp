@@ -10,7 +10,7 @@ from routes import frontend
 from worker import Worker
 import os
 
-PROMPT = "Grade the following work from A to F giving feedback:\n"
+PROMPT = "Grade the following work to an A level standard from A to F giving feedback:\n"
 MODEL = "llama3"
 
 UPLOAD_FOLDER = "uploads"
